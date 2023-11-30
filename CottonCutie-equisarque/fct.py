@@ -4,10 +4,9 @@ def addition(x, y):
     a = x+y
     return a
 
-
 def soustraction(x, y):
     """Retourne la différence de x et y"""
-    return 
+    return  x-y
 
 
 def noms_binome():
@@ -24,3 +23,4 @@ print(f"La somme de {a} et {b} vaut {addition(a, b)}")
 print(f"La différence de {a} et {b} vaut {soustraction(a, b)}")
 
 noms_binome()
+
