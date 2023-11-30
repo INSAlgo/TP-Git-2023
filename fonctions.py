@@ -18,7 +18,7 @@ def noms_binome():
 
 
 a = 2
-b = 1
+b = 3
 
 print(f"La somme de {a} et {b} vaut {addition(a, b)}")
 print(f"La différence de {a} et {b} vaut {soustraction(a, b)}")
