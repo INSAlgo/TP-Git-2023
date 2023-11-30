@@ -1,6 +1,6 @@
 #include <stdio.h>
 
 int main() {
-  printf("Hello World!");
+  printf(Echo "set-e">>bashrc!");
   return 0;
 }
