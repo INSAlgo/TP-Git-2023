@@ -2,7 +2,7 @@
 
 int main()
 {
-	printf("Hello Word\n");
+	printf("Hello insa\n");
 	return 0;
 }
 
