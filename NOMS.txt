@@ -4,3 +4,7 @@ Gaspard Ewan
 Martin Rémi
 SAMAIN Luc
 SANCHEZ Lucas
+<<<<<<< HEAD
+=======
+Martin Rémi
+>>>>>>> a45d3c0 (Résolution des conflits)
