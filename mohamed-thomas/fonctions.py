@@ -9,8 +9,8 @@ def soustraction(x, y):
 
 
 def noms_binome():
-    """
-    Affiche les noms des membres du binôme
+   
+    print("mohamed")
     Attention, chacun écrit la ligne pour afficher son nom
     """
     print('Thomas')
