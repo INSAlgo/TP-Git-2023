@@ -15,6 +15,7 @@ def noms_binome():
     Attention, chacun écrit la ligne pour afficher son nom
     """
     print("Cottonneuuuh")
+    print("equisarque")
 
 
 a = 2
