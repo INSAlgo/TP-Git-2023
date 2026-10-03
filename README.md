@@ -1,120 +1,230 @@
-# TP Git
+# 🧪 TP Git — **Version 2025**
 
-### Qu'est-ce que Git ?
+## Qu'est-ce que Git ?
 
-Git est un logiciel de gestion de versions. C'est-à-dire qu'il vous aide à gérer les différentes versions de votre code, ainsi qu'à collaborer à plusieurs sur un même projet.
+Git est un logiciel de gestion de versions permettant de suivre l'évolution d'un projet, de conserver un historique et de collaborer efficacement.
 
-N'hésitez pas à vous référer au [cours](Cours.pdf) ou aux slides [slides](Slides.pdf) pour ce TP !
+Il est utilisé partout : projets étudiants, stages, entreprises, open source…
 
-### Installation de git
+---
 
-Sur Linux, git est installé par défaut sur le système.
-Pour ce qui est de Windows et MacOS, il suffit de se rendre sur <https://git-scm.com/downloads> et de suivre les instructions de Windows / MacOS selon votre système.
-Après avoir téléchargé git, configurez Git pour qu’il associe vos commits à votre nom et adresse e-mail:
+# Installation de Git
 
-`git config --global user.name "Votre Nom"`
+## **Linux**
 
-`git config --global user.email supermail@gmail.com`
+La plupart des distributions possèdent git nativement.
 
-### Créer un compte Github
+Sinon, installez-le avec le gestionnaire de paquets :
 
-Vous avez besoin d'un compte Github pour ce TP.
-Si vous ne possédez pas encore de compte github, vous pouvez le créer sur <https://github.com/join>.
+```bash
+sudo apt-get install git        # Ubuntu / Debian
+sudo dnf install git            # Fedora
+sudo pacman -S git              # Arch
 
-On passera vous voir pour vous ajouter au repo, dites nous si on vous a oublié.
-
-## Partie 1 : Hello world
-
-**IMPORTANT** : Les commandes données par la suite ne sont pas complètes, c'est à vous de trouver les bons arguments à ajouter ;) Vous pouvez vous aider des ressources de ce dépot ou d'Internet.
-
-### Cloner le dépot
-
-Récupérez ce dépot en local sur votre PC en utilisant la commande `git clone`. Déplacez vous dans le dossier ainsi crée.
-
-### Créer une branche et un dossier
-
-Chaque binôme travaille sur sa propre branche. Créez chez un membre du binôme votre branche (nommée `prénom1-prénom2`) avec `git branch`, puis placez vous sur celle-ci avec `git checkout`.
-
-Créez aussi un dossier portant le même nom à la racine du projet, où vous placerez votre code.
-Créez votre fichier de code dans le langage de votre choix. Faites en sorte que celui-ci affiche `Hello world` à l’exécution.
-
-### Partager les modifications
-
-Toutes ces actions étant faites sur un PC, il faut les partager pour que le second membre du binôme puisse y accéder !
-Commencez par ajouter à Git les modifications apportées au fichier avec `git add` suivi du chemin vers le fichier.
-
-C'est le moment d'essayer la commande `git status`. Elle vous permet de voir les modifications qui seront enregistrées dans le prochain commit. Cette commande est très utile pour savoir où on en est. Prenez l'habitude de l'utiliser avant chaque commit pour être sûr de ce que vous faites.
-
-Vous pouvez maintenant enregistrer les modifications avec `git commit`. Pensez à bien décrire ce que vous avez fait dans le message de commit ! Pour écrire votre message directement dans le terminal, ajoutez `-m` à la commande suivi du message entre guillemets.
-
-Il faut ensuite pousser les modifications sur le dépot GitHub avec `git push` (lisez bien les messages d'erreur si vous en avez, ils vont aideront à trouver la bonne commande).
-
-Pour voir si le code a bien été partagé, rendez vous sur Github et vérifiez que votre branche est bien apparue, avec votre fichier.
-
-### Récupérer les modifications
-
-Une fois les modifications en ligne, il faut les récupérer sur le second PC.
-
-Pour voir les branches que vous avez en local, vous pouvez utiliser `git branch` sans argument. Vous pouvez constater que vous n'avez que la branche `main` pour l'instant, et pas celle de votre binôme. Pour voir aussi les branches du dépot distant, ajoutez `--all` à la commande.
-
-Mais là encore, la branche de votre binôme ne s'affiche pas, pourquoi ? En fait, il faut mettre à jour en local les informations sur le dépot avec `git fetch`. Constatez maintenant que la branche est dans la liste.
-
-Vous pouvez maintenant vous placer sur votre branche, ce qui a pour effet d'appliquer les commits, et donc de récupérer les modifications ! Comme vous venez de récupérer la branche sur votre machine, elle est à jour avec le dépot. Mais par la suite, il faudra récupérer les nouveaux commits avec `git pull`.
-
-Que se passe-t-il si vous retournez sur la branche `main` ? Vous devriez maintenant comprendre comment Git vous permet d'avoir plusieurs versions d'un projet en parallèle.
-
-### Plus de modifications
-
-C'est maintenant à l'autre membre du binôme de faire des modifications. Changez le message pour ne plus afficher `Hello world` mais `Hello INSA`. Faites en sorte que l'autre membre du binôme récupère les changements.
-
-## Partie 2 : Travail en parallèle
-
-Pour cette partie, vous allez utiliser le template de code. Copiez le fichier `fonctions.py` dans votre dossier, puis faites un commit avant toute modification, pour que les deux membres aient le fichier.
-
-### Commits en parallèle
-
-Un membre du binôme complète la fonction `addition()`, et l'autre la fonction `soustraction()`. Chacun pousse ensuite ses changements.
-
-La deuxième personne va avoir une surprise : des changements ont été poussés entre temps, et git ne veut pas les écraser !
-
-Il faut donc récupérer les modifications de la première personne et les fusionner.
-Pour faire cela, il faut donner une stratégie à Git, nous allons utiliser le rebase. Vous pouvez donc récupérer puis rebase en ajoutant `--rebase` à la commande que vous utilisez pour récupérer les modifications.
-
-### Résolution de conflit
-
-Dans cette partie, les deux membres du binôme vont modifier la même fonction, `noms_binome()`, qui doit afficher vos noms sur deux lignes différentes. Chacun rajoute le code pour afficher son nom et seulement son nom. Faites ensuite un commit et pousser vos changements.
-
-Comme vous avez normalement modifié la même ligne pour afficher votre nom, git ne sait pas quelle version garder !
-
-Lorsqu'il y a un conflit comme ici, git génère dans le fichier de nouvelles lignes pour vous aider à comprendre où sont les problèmes. Ces lignes se présentent sous cette forme :
-
-```c
-<<<<<<< HEAD
-int a = 1;
-=======
-int a = 2;
->>>>>>> branche_a_merge 
 ```
 
-Vous pouvez alors choisir celles que vous voulez (la version de GitHub, la version locale, ou les deux). N'oubliez pas d'enlever les lignes rajoutées par git. Une fois cela fait, terminez le rebase avec `git rebase --continue`. Une fois le rebase terminé, vous devriez pouvoir pousser vos modifications.
+## **macOS**
 
-Comment auriez-vous pu faire pour avoir moins de difficultés à fusionner ?
+Le plus simple est d'installer Git via Homebrew :
 
-## Partie 3 : Mettre vos modifications sur la branche main
+```bash
+brew install git
 
-Le but est maintenant d'ajouter vos modifications sur la branche `main`. Cette branche étant protégée, vous ne pouvez pas mettre directement le code de votre branche dessus. Pour faire cela, vous devez passer par les **pull requests**.
+```
 
-### Première pull request
+Vous pouvez aussi l'obtenir via Xcode Command Line Tools (Git est inclus).
 
-Créez une pull request pour votre branche. Faites bien attention au titre et à la description afin que l'on sache en quoi votre code consiste ! Une fois cela fait, vous pouvez demander à un administrateur du dépot GitHub de valider vos modifications, pour les mettre sur la branche `main`.
+## **Windows**
 
-### Pull request avec un conflit
+Téléchargez Git for Windows :
 
-Nous allons maintenant essayer de faire une pull request qui rentre en conflit avec la branche `main`. Pour cela, chacun des membres du binôme créent une branche à leur nom. Sur ces branches, rajoutez chacun votre nom dans le fichier `NOMS.txt`, sur la même ligne. Faites ensuite les pull requests pour ces branches.
+👉 https://git-scm.com/download/win
 
-Comme plus tôt, c'est celui qui passe en deuxième qui a des problèmes. Comme les changements sont en conflit, GitHub vous indique que les modifications ne peuvent pas être automatiquement appliquées sur le `main`. Aidez-vous de l'explication plus haut pour régler ce conflit en utilisant la commande `git rebase main` depuis votre branche locale.
+Installez **Git Bash**, l'outil conseillé pour ce TP.
 
-## Partie bonus : Coder un jeu
+---
 
-Si vous êtes arrivé jusque-là, c'est que vous êtes prêt à utiliser Git pour coder pour de vrai !
-Codez un jeu de morpion en vous répartissant bien les tâches, notamment en découpant votre code en fonctions.
+Configurez ensuite votre identité Git :
+
+```bash
+git config --global user.name "Votre Nom"
+git config --global user.email "supermail@gmail.com"
+
+```
+
+---
+
+# Clonage via Token GitHub
+
+GitHub n'autorise plus les mots de passe pour les opérations Git.
+
+Vous devez utiliser un **Personal Access Token (PAT)**.
+
+## 1. Être invité(e) sur le dépôt
+
+⚠️ **Important : avant de pouvoir push la moindre modification**, les formateurs doivent passer vous voir pour vous inviter à participer au dépôt GitHub en tant que collaborateur. Il faut donc demander cette étape explicitement dès le début du TP (lever la main et faites-nous un grand sourire, on saura de quoi il s'agit ☺️).
+
+Une fois l'invitation envoyée, **chaque membre du binôme** doit l'accepter :
+
+- soit en cliquant sur le lien reçu par **mail**,
+- soit directement depuis la page du dépôt sur GitHub (un bandeau d'invitation s'affiche en haut de la page une fois connecté).
+
+Sans cette acceptation, vos commandes `git push` seront refusées même avec un token valide.
+
+## 2. Créer un token GitHub
+
+GitHub → Settings → Developer Settings → Personal access tokens → **Tokens (classic)**
+
+⚠️ Utilisez bien un token **classique** (*classic*), **pas** un *fine-grained token*.
+
+Émettre un token avec la permission :
+
+- **repo** (accès complet aux dépôts privés)
+- Expiration courte (1–7 jours pour le TP)
+
+<img width="638" height="381" alt="image" src="https://github.com/user-attachments/assets/e7ac3f43-92cf-4fde-aefd-b4dc552309c6" />
+
+Conservez-le ! Vous ne pourrez plus le voir après création.
+
+## 3. Cloner un dépôt avec un token
+
+```bash
+git clone https://github.com/<organisation>/<repo>.git
+
+```
+
+Lorsque Git demande :
+
+```
+Username: votre identifiant GitHub
+Password: collez votre token
+
+```
+
+---
+
+# Partie 1 : Hello world
+
+*(Les commandes ne sont pas complètes : à vous de trouver les bons arguments.)*
+
+## 1. Cloner le dépôt
+
+```bash
+git clone <url-du-repo>
+cd <nom-du-repo>
+
+```
+
+## 2. Créer une branche et un dossier
+
+```bash
+git switch -c prenom1-prenom2
+
+```
+
+Créer un dossier du même nom et un fichier affichant *Hello world*.
+
+## 3. Partager les modifications
+
+```bash
+git add .
+git status
+git commit -m "feat: add hello world"
+git push -u origin prenom1-prenom2
+
+```
+
+Vérifiez sur GitHub que tout apparaît.
+
+## 4. Récupérer sur le second PC
+
+```bash
+git fetch
+git switch prenom1-prenom2
+git pull
+
+```
+
+## 5. Modifier : Hello INSA
+
+L'autre membre modifie → commit → push → pull.
+
+---
+
+# Partie 2 : Travail en parallèle
+
+## 1. Copier *fonctions.py* et faire un commit
+
+Les deux membres doivent avoir la même version avant modifications.
+
+## 2. Commits en parallèle
+
+- A modifie `addition()`
+- B modifie `soustraction()`
+- chacun push
+
+Le second verra un rejet → il faut rebase :
+
+```bash
+git pull --rebase
+
+```
+
+---
+
+## Résolution de conflit
+
+Vous modifiez tous les deux **la même ligne** dans `noms_binome()`.
+
+Git ajoute des marqueurs :
+
+```
+<<<<<<< HEAD
+...
+=======
+...
+>>>>>>> origin/main
+
+```
+
+Corriger → sauvegarder → puis :
+
+```bash
+git add <fichier>
+git rebase --continue
+
+```
+
+---
+
+# Partie 3 : Pull requests vers main
+
+## 1. Première PR
+
+Depuis GitHub → **New Pull Request**, bon titre + description.
+
+Demander validation à un admin.
+
+## 2. PR avec conflit
+
+Créer chacun une branche `feat/prenom`.
+
+Modifier la **même ligne** dans `NOMS.txt`.
+
+Les PR entrent en conflit.
+
+En local :
+
+```bash
+git fetch
+git rebase main
+
+```
+
+Résoudre → `git add` → `git rebase --continue`.
+
+---
+
+# Partie bonus
+
+Créer un jeu de morpion réparti en plusieurs branches de fonctionnalités.
